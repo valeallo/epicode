@@ -1,25 +1,90 @@
 ﻿body
 {
     margin: auto;
-    max-width: 80%;
+    max-width: 90%;
     font-family: Arial, Helvetica, sans-serif;
     display: block;
 
 }
+header 
+{
+    display: flex;
+    flex-direction: column;
+
+}
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 
+{
+    margin-top: 0.1em;
+}
+ .subtitle {
+     font-size: 14px;
+     color: #808080;
+     margin-bottom: 0.5em;
+ }
+.title nav {
+    font-size: 12px;
+    margin-bottom: 0.4em;
+}
+ .title nav a 
+ {
+     color: hotpink;
+     text-decoration: none;
+
+ }
 
 .menu {
     display: flex;
     flex-direction:row;
+    justify-content: space-around;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.menu nav  {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+
+}
+
+
+
+.menu nav a {
+    text-decoration: none;
+    color: #808080;
+    font-size: 12px;
+    margin-left: 2em;
+    
+}
+
+.menu button {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1em;
+
 }
 
 main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+}
+
+figure {
+    margin: 0.2em;
+    padding: 0.2em;
 }
 .picture {
-    max-height: 20vh;
-    max-width: 20vw;
+    max-height: 32vh;
+    max-width: 32vw;
+    border-radius:8px;
 }
 
 
