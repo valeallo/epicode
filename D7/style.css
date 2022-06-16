@@ -1,0 +1,25 @@
+﻿body
+{
+    margin: auto;
+    max-width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+
+}
+
+.menu {
+    display: flex;
+    flex-direction:row;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.picture {
+    max-height: 20vh;
+    max-width: 20vw;
+}
+
+
