@@ -2,6 +2,7 @@
 {
     overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
+
 }
 
 
@@ -35,17 +36,22 @@ nav div img {
     align-items: center;
 }
 
+.nav_right * {
+    margin: 0 0.5em;
+}
+
 .membership {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1vw;
+    padding: 0.5em 1em;
     border: solid;
     border-color: lightgray;
     border-radius: 20px;
     border-width: 1px;
     font-size: 10px;
     margin: 0 0.5vw;
+    height: 2em; 
 }
 
 .user_icon {
@@ -109,8 +115,8 @@ main {
 }
 
 .author_img {
-    max-width: 15px;
-    max-height: 15px;
+    width: 15px;
+    height: 15px;
     border-radius: 3px;
     margin-right: 1em;
 }
@@ -229,7 +235,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5em 1vw;
+    padding: 0.5em 1em;
     border: solid;
     border-color: lightgray;
     border-radius: 20px;
@@ -306,7 +312,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1em;
+    padding: 0.5em 1em;
     border: solid;
     border-color: black;
     border-radius: 20px;
