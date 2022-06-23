@@ -66,14 +66,109 @@ main {
     display: flex;
     flex-direction: row;
     padding: 0 8vw;
+    margin-top: 5vw;
 }
 
 .leftcolumn {
-    background-color: #bed488;
+    background-color: white;
     min-height: 100vw;
     width: 60%;
     display: flex;
     flex-direction: column;
+    padding-right: 4vw;
+    border-right: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+}
+
+.choose_feed {
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    padding: 0.5em 0;
+}
+
+.choose_feed span {
+    margin-right: 2vw;
+    font-size: 0.7em;
+    opacity: 0.5;
+}
+.choose_feed span:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+.article_box {
+    display: flex;
+    flex-direction: row;
+    max-height: 30vh;
+    margin: 3vh 0;
+}
+
+.author_img {
+    max-width: 15px;
+    max-height: 15px;
+    border-radius: 3px;
+    margin-right: 1em;
+}
+
+.article_box  figure {
+    width: 25vw;
+    height: 20vh;
+    overflow: hidden;
+}
+.article_box figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    margin: 0;
+    display: block;
+}
+
+.author_bar {
+    font-size: 0.6em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.author_bar a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+
+
+.article_box h3 {
+    margin: 0.5em 0;
+}
+.preview {
+    color: grey;
+    font-size: 0.8em;
+    margin: 0.5em 0;
+}
+
+.preview p{
+    margin: 0;
+}
+
+.article_info {
+    color: grey;
+    font-size: 0.6em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top:0.5em;
+    
+}
+
+.article_info div {
+    margin-right:0.7em;
 }
 
 
@@ -81,11 +176,15 @@ main {
     background-color: white;
     min-height: 100vw;
     width: 30%;
-    padding: 5vh 5vw;
+    padding: 5vh 0 2vh 4vw;
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
+
+
+
 
 
 
@@ -198,6 +297,9 @@ main {
     color:gray;
     font-size: 0.6em;
 }
+.follow_card div {
+    width: 12vw;
+}
 
 
 .follow_card button {
@@ -261,10 +363,8 @@ main {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    bottom: 1.5em;
-    position: absolute;
     min-height: 10vh;
-    margin-right: 5vw;
+
 }
 
 
@@ -273,4 +373,12 @@ main {
     color: grey; 
     font-size: 0.8em;
     margin: 0 1em;
+}
+
+i {
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
 }
