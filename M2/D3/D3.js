@@ -245,4 +245,8 @@ for (i = 1; i <= 100; i++) {
   Ad esempio, se il valore di "day" è 1, stampa in console "Lunedì"; se il valore fosse 3, in console dovrebbe comparire "Mercoledì".
 */
 let day = 1;
-let week = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]
+let Week = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]
+
+if (day >= 0 && day <= 6 && day % 1 == 0 ) {
+    console.log(Week[day]);
+}
