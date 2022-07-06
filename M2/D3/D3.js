@@ -106,7 +106,7 @@ else {
 */
 let m = 7;
 
-if (typeof (m) == number && m % 1 == 0) {
+if (typeof (m) == number && m % m == 0) {
     console.log("m è intero")
 }
 
@@ -244,9 +244,38 @@ for (i = 1; i <= 100; i++) {
   Scrivi un algoritmo per controllare il giorno della settimana. Usa uno switch-case sulla variabile "day", che può avere un valore da 1 a 7.
   Ad esempio, se il valore di "day" è 1, stampa in console "Lunedì"; se il valore fosse 3, in console dovrebbe comparire "Mercoledì".
 */
-let day = 1;
+let day = 7;
 let Week = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]
 
-if (day >= 0 && day <= 6 && day % 1 == 0 ) {
+if (day >= 0 && day <= 6 && day % day == 0 ) {
     console.log(Week[day]);
 }
+
+
+switch (day) {
+    case 1:
+        console.log("Lunedì");
+        break;
+    case 2:
+        console.log("martedì");
+        break;
+    case 3:
+        console.log("mercoledì");
+        break;
+    case 4:
+        console.log("Giovedì");
+        break;
+    case 5:
+        console.log("Venerdì");
+        break;
+    case 6:
+        console.log("Sabato");
+        break;
+    case 7:
+        console.log("Domenica");
+        break;
+
+
+}
+
+
