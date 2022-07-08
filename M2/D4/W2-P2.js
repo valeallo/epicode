@@ -290,3 +290,9 @@ console.log(sumYears);
 /* ESERCIZIO 18
   Scrivi del codice per recuperare tutti i film dall'array fornito che contengono una parola fornita.
 */
+let search_word = "Lord";
+for (let i = 0; i < titles.length; i++) {
+    if (titles[i].includes(search_word)){
+        console.log(titles[i]);
+    }
+}

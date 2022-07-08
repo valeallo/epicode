@@ -1,7 +1,4 @@
-// Job search - BuildTime #3
-
-/*
-Oggi analizzeremo un problema molto comune: realizzare algoritmi di ricerca.
+/* Oggi analizzeremo un problema molto comune: realizzare algoritmi di ricerca.
 Il tuo compito è creare un algoritmo che cercherà per posizione lavorativa E posizione geografica.
 Ti abbiamo fornito un array chiamato "jobs" in fondo al file, NON modificarlo in alcun modo.
 L'algoritmo che devi realizzare cercherà SIA per posizione lavorativa che per posizione geografica.
@@ -830,3 +827,47 @@ const jobs = [
     fraudulent: 0,
   },
 ]
+let jobs_titles = [];
+let jobs_locations = [];
+for (let i = 0; i < jobs.length; i++) {
+    let jobTitle = jobs[i].title.toLowerCase();
+    let jobLocation = jobs[i].location.toLowerCase();
+    jobs_titles.push(jobTitle);
+    jobs_locations.push(jobLocation);
+}
+
+function findJob(pos, loc) {
+    let posLow = pos.toLowerCase();
+    let locLow =loc.toLowerCase();
+    let arrResults = [];
+    let jobCount = 0;
+    for (let i = 0; i < jobs.length; i++)
+        if (jobs_titles[i].includes(posLow) && jobs_locations[i].includes(locLow)) {
+            let job_found = {
+                job_id: jobs[i].job_id,
+                title: jobs[i].title,
+                location: jobs[i].location,
+                department: jobs[i].department,
+                salary_range: jobs[i].salary_range,
+                telecommuting: jobs[i].telecommuting,
+                has_company_logo: jobs[i].has_company_logo,
+                has_questions: jobs[i].has_questions,
+                employment_type: jobs[i].employment_type,
+                required_experience: jobs[i].required_experience,
+                required_education: jobs[i].required_education,
+                industry: jobs[i].industry,
+                function: jobs[i].function,
+                fraudulent: jobs[i].fraudulent,
+            }
+            arrResults.push(job_found);
+            jobCount++
+        }
+    let search_results = {
+        results: arrResults,
+        count: jobCount,
+    }
+    console.log(search_results);
+    return search_results;
+}
+
+findJob("MArketing", "US");
