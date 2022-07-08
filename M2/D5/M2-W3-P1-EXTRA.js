@@ -164,8 +164,15 @@ function isSpam(emailContent) {
 /* EXTRA 10
  Scrivi una funzione che riceve come parametro una data e ritorna il numero di giorni passati ad oggi.
 */
+let date_1 = new Date('10/25/2021');
+let date_2 = new Date();
 
-
+function days  (date_1, date_2) {
+    let difference = date_1.getTime() - date_2.getTime();
+    let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+    return TotalDays;
+}
+console.log(days(date_1, date_2));
 /* EXTRA 11
  Scrivi una funzione chiamata "matrixGenerator" che riceve come parametri due interi, "x" e "y".
  La funzione deve tornare una matrice di x volte y, e ogni valore deve rappresentare l'indice dell'elemento.
