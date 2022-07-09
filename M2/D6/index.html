@@ -5,26 +5,111 @@
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body>
-    <h1>The most wonderful shop ever</h1>
+<body id="body">
+    <h1 id="h1">The most wonderful shop ever</h1>
     <table>
         <tr>
-            <th>Product1</th>
-            <th>Product2</th>
-            <th>Product3</th>
-            <th>Product4</th>
-            <th>Product5</th>
+            <th><img src="https://picsum.photos/id/4/200/300" alt="" /></th>
+            <th><img src="https://picsum.photos/id/3/200/300" alt="" /></th>
+            <th><img src="https://picsum.photos/id/124/200/300" alt="" /></th>
+            <th><img src="https://picsum.photos/id/78/200/300" alt="" /></th>
+            <th><img src="https://picsum.photos/id/72/200/300" alt="" /></th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><h5>Product</h5></td>
+            <td><h5>Product</h5></td>
+            <td><h5>Product</h5></td>
+            <td><h5>Product</h5></td>
+            <td><h5>Product</h5></td>
         </tr>
         <tr>
-            <td>Centro comercial Moctezuma</td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt enim nec rutrum volutpat. Quisque cursus iaculis enim ac facilisis. </td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt enim nec rutrum volutpat. Quisque cursus iaculis enim ac facilisis. </td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt enim nec rutrum volutpat. Quisque cursus iaculis enim ac facilisis. </td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt enim nec rutrum volutpat. Quisque cursus iaculis enim ac facilisis. </td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt enim nec rutrum volutpat. Quisque cursus iaculis enim ac facilisis. </td>
+        </tr>
+        <tr>
+            <td>60$</td>
+            <td>60$</td>
+            <td>60$</td>
+            <td>60$</td>
+            <td>60$</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.amazon.it/">Link</a></td>
+            <td><a href="https://www.amazon.it/">Link</a></td>
+            <td><a href="https://www.amazon.it/">Link</a></td>
+            <td><a href="https://www.amazon.it/">Link</a></td>
+            <td><a href="https://www.amazon.it/">Link</a></td>
+        </tr>
+        <tr>
+            <td>
+                <form>
+                    <label for="comment">Comment:</label><br>
+                    <input type="text">
+                </form>
+            </td>
+            <td>
+                <form>
+                    <label for="comment">Comment:</label><br>
+                    <input type="text">
+                </form>
+            </td>
+            <td>
+                <form>
+                    <label for="comment">Comment:</label><br>
+                    <input type="text">
+                </form>
+            </td>
+            <td>
+                <form>
+                    <label for="comment">Comment:</label><br>
+                    <input type="text">
+                </form>
+            </td>
+            <td>
+                <form>
+                    <label for="comment">Comment:</label><br>
+                    <input type="text">
+                </form>
+            </td>
         </tr>
     </table>
+    <footer>The most wonderful shop ever <span id="address">via garibaldi 55, 43100 Parma PR</span> </footer>
+
+    <script>
+        function changeTitle(str)
+        {
+            document.getElementById("h1").innerHTML = "New text!";
+        }
+
+        function changeBackgroundColor(color)
+        {
+            document.getElementById('body').style.backgroundColor = 'green';
+        }
+
+        function changeAddress(new_address)
+        {
+            document.getElementById("address").innerHTML = "New adress lorem ipsum 54, Bugliano, PI";
+        }
+
+        function addClass(link)
+        {
+            let links = document.getElementsByTagName("a");
+            console.log(links);
+            for (let element of links) {
+                element.classList.add(link);
+            }
+        }
+        function addClassToImg(imgClass) {
+            let imgs = document.getElementsByTagName("img");
+            for (let element of imgs) {
+                element.classList.toggle(imgClass);
+            }
+            document.getElementsByClassName(imgClass).style.opacity(0);
+        }
+
+    </script>
 </body>
 </html>
