@@ -30,11 +30,12 @@
             <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt enim nec rutrum volutpat. Quisque cursus iaculis enim ac facilisis. </td>
         </tr>
         <tr>
-            <td>60$</td>
-            <td>60$</td>
-            <td>60$</td>
-            <td>60$</td>
-            <td>60$</td>
+            <td class="price">60$</td>
+            <td class="price">60$</td>
+            <td class="price">60$</td>
+            <td class="price">60$</td>
+            <td class="price">60$</td>
+
         </tr>
         <tr>
             <td><a href="https://www.amazon.it/">Link</a></td>
@@ -74,41 +75,62 @@
                     <input type="text">
                 </form>
             </td>
+        </tr>
+        <tr>
+            <td><button onclick="changeTitle()">Change Title</button></td>
+            <td><button onclick="changeBackgroundColor()">Change Background Color</button></td>
+            <td><button onclick="changeAddress()">Change address</button></td>
+            <td><button onclick="addClass()">Add Class</button></td>
+            <td><button onclick="addClassImg()">Add Class Img</button></td>
         </tr>
     </table>
+    <button onclick="changeColor()">Change price Color</button>
+
     <footer>The most wonderful shop ever <span id="address">via garibaldi 55, 43100 Parma PR</span> </footer>
 
     <script>
-        function changeTitle(str)
-        {
+        function changeTitle() {
             document.getElementById("h1").innerHTML = "New text!";
         }
 
-        function changeBackgroundColor(color)
-        {
+        function changeBackgroundColor() {
             document.getElementById('body').style.backgroundColor = 'green';
         }
 
-        function changeAddress(new_address)
-        {
+        function changeAddress() {
             document.getElementById("address").innerHTML = "New adress lorem ipsum 54, Bugliano, PI";
         }
 
-        function addClass(link)
-        {
+        function addClass() {
             let links = document.getElementsByTagName("a");
             console.log(links);
             for (let element of links) {
-                element.classList.add(link);
+                element.classList.add("link");
             }
         }
-        function addClassToImg(imgClass) {
+        function addClassImg() {
             let imgs = document.getElementsByTagName("img");
             for (let element of imgs) {
-                element.classList.toggle(imgClass);
+                element.classList.toggle("imgClass");
+                element.style.opacity = "1";
             }
-            document.getElementsByClassName(imgClass).style.opacity(0);
+            let img_class = document.getElementsByClassName("imgClass");
+            for (let el of img_class) {
+                el.style.opacity = "0";
+            }
+
         }
+        function changeColor() {
+            let prices = document.getElementsByClassName("price");
+            for (let i = 0; i < prices.length; i++) {
+                let randomColorRed = Math.floor(Math.random() * 256);
+                let randomColorGreen = Math.floor(Math.random() * 256);
+                let randomColorBlue = Math.floor(Math.random() * 256);
+                prices[i].setAttribute("style", "color: rgb(" + randomColorRed + "," + randomColorGreen + "," + randomColorBlue + ")");
+            }
+            }
+
+  
 
     </script>
 </body>
