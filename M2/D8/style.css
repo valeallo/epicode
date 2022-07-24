@@ -1,0 +1,84 @@
+﻿/*ESERCIZI CSS
+
+11) Assegna una larghezza massima al tag body e centralo nella pagina
+12) Centra ogni tag h1
+13) Cambia il colore di ogni link nella pagina
+14) Crea una classe e assegnale un bordo
+15) Fai in modo che la i bordi della tabella che hai creato siano arrotondati
+16) Aggiungi un margine ad ogni paragrafo
+17) Crea una classe che una volta assegnata cambi la dimensione e il peso del font
+18) Crea una classe per nascondere un elemento
+19) Aggiungi un bordo verde a ogni <td >
+20) Aggiungi un bordo puntato rosso a ogni <tr > (nota: <tr> non accetta una proprietà "border")*/
+
+
+
+body {
+    max-width: 80%;
+    overflow-x:hidden;
+    margin: auto;
+}
+
+h1 {
+    margin: auto;
+    max-width: 50%;
+}
+
+a {
+    color: red;
+}
+
+table {
+    border-radius: 25px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+p {
+    margin: 20px;
+}
+td {
+    border-width: 1px;
+    border-color: green;
+    border-style: solid;
+    width: 10%;
+    height: 10%;
+}
+
+tr:first-of-type th:first-of-type {
+    background-color: blue;
+    border-top-left-radius: 25px;
+}
+th:last-of-type {
+    background-color: aquamarine;
+    border-top-right-radius: 25px;
+}
+
+
+tr:last-of-type td:first-child {
+    background-color: aquamarine;
+    border-bottom-left-radius: 25px;
+}
+
+tr:last-of-type td:last-child {
+    background-color: aquamarine;
+    border-bottom-right-radius: 25px;
+}
+tr {
+    border-width: 1px;
+    border-color: red;
+    border-style: dotted;
+    width: 10%;
+    height: 10%;
+
+}
+
+
+.sixeweight {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.hidden {
+    display: none;
+}

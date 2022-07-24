@@ -1,0 +1,177 @@
+<html>
+  <head>
+    <style>
+      .myHeading {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 id="h1">Questo è il titolo della pagina</h1>
+      <h2>Questo è il sottotitolo della pagina</h2>
+    </div>
+
+    <div>
+      <hr />
+
+      <ul id="firstList">
+        <li>Primo</li>
+        <li>Secondo</li>
+        <li>Terzo</li>
+      </ul>
+
+      <ul id="secondList">
+        <li>Primo</li>
+        <li>Secondo</li>
+        <li>Terzo</li>
+      </ul>
+
+      <a href="epicode.com">Questo link porta all'homepage di EPICODE</a>
+
+      <div id="divp">
+        <p>Questo testo è qui solo per gli esercizi</p>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          id="input-field"
+          placeholder="input field per gli esercizi"
+        />
+      </div>
+    </div>
+
+    <div>
+      <p>Anche questo testo è qua solamente per gli esercizi!</p>
+      <h2 style="color: red" id="footer">
+        Salva questa pagina sul tuo computer e aprila con VSCode per vedere le
+        domande!
+      </h2>
+    </div>
+    <script>
+      /* ESERCIZIO 1
+       Scrivi una funzione per cambiare il titolo del documento in qualcos'altro.
+      */
+
+      const changeTitle = function (newTitle) {
+          document.getElementsByTagName("h1")[0].innerHTML = newTitle;
+      }
+      /* ESERCIZIO 2
+       Scrivi una funzione per cambiare la classe del titolo della pagina in "myHeading".
+      */
+
+      const addClassToTitle = function () {
+          document.getElementsByTagName("h1")[0].classList.add("myHeading");
+
+        }
+
+
+      /* ESERCIZIO 3
+       Scrivi una funzione per cambiare il contenuto di tutti i p che sono discendenti di un div.
+      */
+
+      const changePcontent = function (newPDiv) {
+          let p = document.querySelectorAll("div p");
+          for (let el of p) {
+              el.innerHTML = newPDiv;
+          }
+      }
+   
+      /* ESERCIZIO 4
+       Scrivi una funzione per cambiare la proprietà href di ogni link a https://www.google.com
+      */
+
+      const changeUrls = function () {
+          let links = document.getElementsByTagName("a");
+          for (let el of links) {
+              el.setAttribute("href", "https://www.google.com");
+          }
+      }
+      /* ESERCIZIO 5
+       Scrivi una funzione per aggiungere un nuovo elemento alla seconda lista non-ordinata.
+      */
+
+      const addToTheSecond = function (content) {
+          let ul = document.getElementById("SecondList");
+          let li = document.createElement("li");
+          li.appendChild(document.createTextNode("Quarto"));
+          ul.appendChild(li);
+      }
+
+      /* ESERCIZIO 6
+       Scrivi una funzione per aggiungere un secondo paragrafo al primo div.
+      */
+
+      const addParagraph = function (content) {
+          let divp = document.getElementById("divp")
+          let p = document.createElement("p");
+          p.appendChild(document.createTextNode("secondo paragrafo"));
+          divp.appendChild(p);
+
+        }
+
+      /* ESERCIZIO 7
+       Scrivi una funzione per far scomparire la prima lista non-ordinata.
+      */
+
+      const firstUlDisappear = function () {
+          document.getElementById("firstList").style.visibility = "hidden";
+        }
+
+
+      /* ESERCIZIO 8
+       Scrivi una funzione per rendere verde lo sfondo di ogni lista non-ordinata.
+      */
+
+      const paintItGreen = function () {
+          let uls = document.getElementsByTagName("ul");
+          for (let el of uls) {
+              el.style.backgroundColor = "green";
+          }
+        }
+ 
+
+      /* ESERCIZIO 9
+       Rendi il tag h1 capace di cambiare colore del testo ogni volta che l'utente ci clicca sopra.
+      */
+      document.getElementById("h1").addEventListener("click", makeItClickable);
+
+      function makeItClickable () {
+          let randomColorRed = Math.floor(Math.random() * 256);
+          let randomColorGreen = Math.floor(Math.random() * 256);
+          let randomColorBlue = Math.floor(Math.random() * 256);
+          document.getElementById("h1").setAttribute("style", "color: rgb(" + randomColorRed + "," + randomColorGreen + "," + randomColorBlue + ")");
+        
+      }
+
+      /* ESERCIZIO 10
+       Cambia il testo del footer con qualcos'altro quando l'utente ci clicca sopra.
+      */
+        document.getElementById("footer").addEventListener("click", changeFooterText);
+
+      function changeFooterText() {
+        document.getElementById("footer").innerHTML = "ciao ciao ciao ciao"
+      }
+
+      /* ESERCIZIO 11
+       Aggiungi un event listener al campo di testo nella pagina e fai in modo che dopo ogni lettera il suo valore venga mostrato in console.
+      */
+
+      const inputField = document.getElementById('input-field')
+      // ...
+
+      /* ESERCIZIO 12
+       Crea un messaggio di benvenuto con un alert quando la pagina ha finito di caricarsi.
+      */
+
+      window.onload = function () {
+        //
+      }
+
+      /* ESERCIZIO 13
+       Utilizza tag HTML5 per assegnare il corretto contenuto semantico alle differenti sezioni della pagina.
+      */
+    </script>
+  </body>
+</html>
