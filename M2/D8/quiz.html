@@ -26,7 +26,8 @@
         / Presenta le domande al giocatore una alla volta, invece di mostrargliele tutte insieme
         / Permetti al giocatore di selezionare il livello di difficoltà e il numero delle risposte (puoi recuperarle da qui https://opentdb.com/api.php?amount=10&category=18&difficulty=easy modificando nell'URL i parametri "amount")
           e "difficulty"
-    --><head>
+    -->
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
     <style>
         body {
@@ -241,7 +242,8 @@
                            answer_containers[i].style.color = 'red';
                        }
                    }
-                   resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+                   resultsContainer.innerHTML = total + ' risposte corrette su ' + questions.length;
+                   alert(total + ' risposte corrette su ' + questions.length);
                }
               
 
