@@ -225,23 +225,48 @@ function count_cells() {
 }
 
 //45) Cancella l'ultima lettera dal titolo della pagina ogni volta che l'utente ci clicca sopra
+document.getElementById("titoloH1").addEventListener("click", () => {
+    let titolo = document.getElementById("titoloH1").innerHTML;
+    document.getElementById("titoloH1").innerHTML = titolo.slice(0, - 1);
+    
+})
 
 
 
 //46) Aggiungi un event listener in modo che cliccando un < td > nella pagina, questo cambi colore di sfondo
-
+for (let el of tds) {
+    el.addEventListener("click", () => {
+        let randomColorRed = Math.floor(Math.random() * 256);
+        let randomColorGreen = Math.floor(Math.random() * 256);
+        let randomColorBlue = Math.floor(Math.random() * 256);
+        el.setAttribute("style", "background-color: rgb(" + randomColorRed + "," + randomColorGreen + "," + randomColorBlue + ")");});
+}
 
 
 //47) Aggiungi un bottone che una volta cliccato elimini un < td > a caso nella tabella
+let deleteTd = document.createElement("button");
+deleteTd.innerHTML = "Delete Td";
+document.body.appendChild(deleteTd);
+deleteTd.addEventListener("click", () => {
+    let randTd = Math.floor(Math.random() * (tds.length + 1));
+    let e = document.getElementsByTagName("td")[randTd];
+    e.remove();
 
+})
 
 
 //48) Aggiungi automaticamente un bordo rosa ad una cella della tabella quando il cursore ci passa sopra
-
+let pinkTd = document.getElementById("change_color")
+pinkTd.addEventListener("mouseover", () => {
+    pinkTd.style.borderColor = "pink";
+})
 
 
 //49) Scrivi una funzione per creare una tabella con 4 righe e 3 colonne e aggiungerla alla fine della pagina
 
+function createTable() {
 
+}
 
 //50) Scrivi una funzione per rimuovere l'ultima tabella presente nella pagina
+function deleteTable() {}

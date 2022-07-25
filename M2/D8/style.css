@@ -41,8 +41,9 @@ td {
     border-width: 1px;
     border-color: green;
     border-style: solid;
-    width: 10%;
-    height: 10%;
+    width: 16vw;
+    height: 16vh;
+    
 }
 
 tr:first-of-type th:first-of-type {
@@ -81,4 +82,9 @@ tr {
 
 .hidden {
     display: none;
+}
+
+img {
+    width: 16vw;
+    height: 40vh;
 }
