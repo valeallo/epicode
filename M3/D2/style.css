@@ -1,0 +1,122 @@
+﻿
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: Arial, Helvetica, sans-serif;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #FEF7E2;
+    padding:4vh 0;
+    width: 80%;
+    align-items: center;
+    border-radius: 88px;
+    margin: 2em auto;
+}
+button {
+    background-color: #FFDF7E;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 8vw;
+    height:8vh;
+    border: none;
+    padding: 0.5em;
+    border-radius: 20px;
+    font-size: 12px;
+    border-radius: 88px;
+}
+#logo{
+    height:10vh;
+    width:5vw;
+}
+
+#shop{
+    width: 16vw;
+    height: 16vh;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+main{
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card {
+    background-color: #FEF7E2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 23vw;
+    height: 94vh;
+    border-radius: 88px;
+    overflow: hidden;
+}
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    margin: 0;
+    display: block;
+    z-index: 0;
+    filter:blur(0.6px);
+}
+.info {
+    display: flex;
+    flex-direction: row;
+    padding: 6vh 0;
+    justify-content: space-evenly;
+    font-size: 14px;
+    
+}
+.origin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+h3{
+    
+    margin:0;
+}
+.buttonDiv {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+}
+#AddToCart {
+    background-color: #FFDF7E;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 12vw;
+    border: none;
+    padding: 0.5em;
+    border-radius: 20px;
+    margin-bottom: 1em;
+    font-size: 12px;
+}
+
+
