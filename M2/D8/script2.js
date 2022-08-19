@@ -45,12 +45,23 @@ function find_max_min() {
 }
 
 //28) Crea un array di array, nel quale ogni array "figlio" ha 10 numeri random
-let big_array = [["arr_zero"], ["arr_one"], ["arr_two"], ["arr_three"], ["arr_four"]]
+let big_array = [["arr_zero"], ["arr_one"], ["arr_two"], ["arr_three"], ["arr_four"]];
 
 for (let i = 0; i < big_array.length; i++) {
     for (let d = 0; d < 10; d++) {
         big_array[i][d] = Math.floor(Math.random() * 10)
     }
+}
+console.log(big_array);
+
+let big_array = [];
+
+for (let i = 0; i < ; i++) {
+    let small_array = [];
+    for (let d = 0; d < 10; d++) {
+        small_array[d].push(Math.floor(Math.random() * 10));
+    }
+    big_array.push(small_array);
 }
 console.log(big_array);
 

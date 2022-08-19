@@ -1,0 +1,54 @@
+.navbar .d-flex img {
+    width: 40px;
+    height: 40px;
+}
+
+.centrato {
+    display:flex;
+    align-items: center;
+}
+
+#heroCarousel {
+    height: 40vh;
+}
+
+#heroCarousel .carousel-inner {
+    height:100%;
+}
+
+#heroCarousel .carousel-indicators button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+body {
+    background-color: #12161C;
+}
+
+.link {
+    color: #6593bd;
+    opacity:.8;
+    transition: all .3s ease;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.link:hover {
+    opacity: 1;
+}
+.carousel button {
+    opacity: 1;
+}
+
+.bg-dark {
+    background-color: #1F232C!important;
+}
+
+
+.carousel:not(#heroCarousel) .carousel-item img {
+    transition: all .3s ease;
+}
+.carousel:not(#heroCarousel) .carousel-item img:hover {
+    transform: scale(1.3);
+}

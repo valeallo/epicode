@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .mycanvas {
+            background-color: #94BBDE;
+            height: 580px;
+            width: 560px;
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        .ball {
+            position: absolute;
+            background-color: #EF1B70;
+            height: 60px;
+            width: 60px;
+            top: 100px;
+            left: 260px;
+            border-radius: 50%;
+            animation: bounce 1s infinite;
+            z-index: 2;
+        }
+        .shadow {
+            background-color: #545454 ;
+            opacity: 0.1;
+            position: absolute;
+            height: 10px;
+            width: 50px;
+            top: 418px;
+            left: 263px;
+            border-radius: 50%;
+            z-index: 1;
+            animation: shrink 1s infinite;
+        }
+
+        @keyframes bounce {
+            25% {
+                height: 60px;
+                width: 50px;
+            }
+            30% {
+                height: 60px;
+                width: 45px;
+            }
+            50% {
+                height: 60px;
+                width: 45px;
+                transform: translateY(270px);
+            }
+            51% {
+                height: 40px;
+                width: 70px;
+            }
+            55% {
+                height: 40px;
+                width: 70px;
+            }
+            100%{
+                transform: translateY(0px);
+            }
+
+        }
+   
+     
+
+  
+
+        @keyframes shrink {
+            50% {
+                transform: scaleX(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mycanvas">
+        <div class="container">
+            <div class="ball"></div>
+            <div class="shadow"></div>
+        </div>
+    </div>
+    
+</body>
+</html>
