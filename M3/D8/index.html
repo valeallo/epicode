@@ -38,10 +38,11 @@
             position: absolute;
             height: 10px;
             width: 50px;
-            top: 418px;
+            top: 398px;
             left: 263px;
             border-radius: 50%;
             z-index: 1;
+            filter: blur(0.2rem);
             animation: shrink 1s infinite;
         }
 
@@ -55,17 +56,18 @@
                 width: 45px;
             }
             50% {
-                height: 60px;
-                width: 45px;
+                height: 40px;
+                width: 60px;
                 transform: translateY(270px);
             }
-            51% {
-                height: 40px;
-                width: 70px;
-            }
+            
             55% {
                 height: 40px;
-                width: 70px;
+                width: 60px;
+            }
+            70% {
+                height: 60px;
+                width: 45px;
             }
             100%{
                 transform: translateY(0px);
