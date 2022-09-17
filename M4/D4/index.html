@@ -56,6 +56,10 @@
         #hidden {
             visibility: hidden;
         }
+
+        #inCart {
+            background-color: lightblue;
+        }
     </style>
 </head>
 <body>
@@ -95,33 +99,29 @@
 
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">Album example</h1>
+                <h1 class="jumbotron-heading">Library</h1>
 
                 <form id="form" onsubmit="return false;">
                     <input type="text" id="userInput" />
                     <input type="submit" onclick="searchBooks();" />
                 </form>
                 </br>
-                <a href="#" class="btn btn-primary my-2" onclick="loadBooks()">Load Books</a>
+                <a href="#" class="btn btn-primary my-2" onclick="loadCart()">Load Cart</a>
                 <a href="#" class="btn btn-secondary my-2" onclick="createcard()">Load Secondary Images</a>
             </div>
         </section>
 
         <div class="album py-5 bg-light">
             <div class="container">
+                <div class="row" id="cart">
 
+                </div>
+            </div>
+            <div class="container">
                 <div class="row card_container">
 
 
                 </div>
-            <div class="container">
-                <div class="row cart">
-
-
-                </div>
-
-            </div>
-
             </div>
         </div>
 
@@ -137,18 +137,68 @@
         </div>
     </footer>
     <script>
-        let api_key = "563492ad6f91700001000001f56a25ef6c6648dd94837fc1d4fd6724";
-        let immagini = document.getElementsByClassName("card-img-top");
-  
+        let cart = [];
+        let removedbooks = [];
+        let allbooks = [];
+        
+
+
+        function addToCart(asin) {
+            let thiscard = document.getElementById("cardBody" + asin);
+            if (!cart.includes(asin)) {
+                console.log(thiscard);
+                thiscard.style.backgroundColor = "lightblue";
+                this.innerHTML = "Remove From Cart";   
+                cart.push(asin);
+            }
+            else {
+                thiscard.style.backgroundColor = "white";
+                this.innerHTML = "Add to Cart";
+                let index = cart.indexOf(asin);
+                if (index !== -1) {
+                    cart.splice(index, 1);
+                }
+
+            }
+
+        }
+
+        function skipBook(asin) {
+            let thiscard = document.getElementById("cardBody" + asin);
+            let thiscolumn = document.getElementById("thiscolumn" + asin);
+            if (!cart.includes(asin)) {
+                removedbooks.push(asin);
+                thiscolumn.remove();
+            }
+            else {
+                thiscard.style.backgroundColor = "white";
+                this.innerHTML = "Add to Cart";
+                let index = cart.indexOf(asin);
+                if (index !== -1) {
+                    cart.splice(index, 1);
+                    
+                }
+            }
+
+        }
+
+        //function loadCart() {
+        //    let cartContainer = document.getElementById("cart");
+        //    cartContainer.innerHTML = "";
+        //    let cartString = cartTitles.toString();
+        //    cartContainer.innerHTML = cartString;
+        //}
+        
 
         function createcard(cover, title, price, category, asin) {
             let container = document.querySelector(".card_container");
             let column = document.createElement("div");
             column.className = "col-2";
-            column.id = asin;
+            column.id = "thiscolumn" + asin;
             container.appendChild(column);
             let card = document.createElement("div");
             card.className = "card mb-4 box-shadow";
+            card.id = "card" + asin;
             column.appendChild(card);
             let img = document.createElement("img");
             img.src = cover;
@@ -156,6 +206,7 @@
             card.appendChild(img);
             let cardBody = document.createElement("div");
             cardBody.className = "card-body";
+            cardBody.id = "cardBody" + asin;
             card.appendChild(cardBody);
             let cardText = document.createElement("h6");
             cardText.className = "card-text";
@@ -180,12 +231,33 @@
             skipBtn.className = "btn btn-sm btn-outline-secondary";
             skipBtn.innerHTML = "Skip";
             btngroup.appendChild(skipBtn);
+            skipBtn.onclick = function () {
+                skipBook(asin);
+            }
             let addToCartBtn = document.createElement("button");
             addToCartBtn.type = "button";
             addToCartBtn.className = "btn btn-sm btn-outline-secondary";
             addToCartBtn.innerHTML = "Add to Cart";
+            addToCartBtn.onclick = function () {
+                addToCart(asin);
+            }
             btngroup.appendChild(addToCartBtn );   
         }
+
+        
+        async function loadLibrary() {
+            let res = await fetch("https://striveschool-api.herokuapp.com/books");
+            res = await res.json();
+            res.forEach(
+                (el) => {
+                    allbooks.push(el);
+                    createcard(el.img, el.title, el.price, el.category, el.asin);
+                    
+                }
+            )
+        }       
+        loadLibrary();
+
 
         function searchImages() {
             let input = document.getElementById("userInput").value;
@@ -211,44 +283,9 @@
 
 
 
-        function loadBooks() {
-            fetch("https://striveschool-api.herokuapp.com/books",)
-                .then(resp => {
-                    return resp.json()
-                })
-                .then(data => {
-                    console.log(data)
-                    for (i = 0; i < data.length; i++) {
-                        createcard(data[i].img, data[i].title, data[i].price, data[i].category, data[i].asin);
-                    }
+        
 
-                })
-        }
 
-        function loadSecondaryImages() {
-            fetch("https://api.pexels.com/v1/search?query=hygge", {
-                headers: {
-                    Authorization: api_key
-                }
-            })
-                .then(resp => {
-                    return resp.json()
-                })
-                .then(data => {
-                    console.log(data)
-                    for (i = 0; i < immagini.length; i++) {
-                        immagini[i].src = data.photos[i].src.original;
-                        ids[i].innerHTML = data.photos[i].id;
-
-                    }
-
-                })
-        }
-
-        function hideCard(index) {
-            console.log("pressedbutton: " + index)
-            cards[index].setAttribute("id", "hidden")
-        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
@@ -282,7 +319,6 @@ Per raggiungere questo risultato, segui queste istruzioni:
 
 ### EXTRA:
 
-1. Add a **empty cart** button, to delete the whole list
 2. Aggiungi un pulsante per svuotare il carrello
 3. Crea una pagine prodotto: quando l’utente clicca sul libro, deve essere portato ad un’altra pagine. Passa l’ASIN del libro come query nell’URL
 4. Nella pagina prodotto, mostra i dettagli del libro con l’ASIN corrispondente usando questo endpoint: `https://striveschool-api.herokuapp.com/books/IL TUO ASIN QUI`-->
