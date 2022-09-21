@@ -60,6 +60,11 @@
         #inCart {
             background-color: lightblue;
         }
+
+        #cart{
+            background-color: #cef1c0;
+        }
+
     </style>
 </head>
 <body>
@@ -106,18 +111,51 @@
                     <input type="submit" onclick="searchBooks();" />
                 </form>
                 </br>
-                <a href="#" class="btn btn-primary my-2" onclick="loadCart()">Load Cart</a>
+                <a href="#" class="btn btn-primary my-2" onclick="() => { console.log(cart) }">Load Cart</a>
                 <a href="#" class="btn btn-secondary my-2" onclick="createcard()">Load Secondary Images</a>
             </div>
         </section>
 
         <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row" id="cart">
-
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Carrello
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container">
+                                <div class="row" id="cart">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Risultati ricerca
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container">
+                                <div class="row" id="results">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="container">
+                <h2 style="margin: 3em 0; border-bottom: 2px; border-bottom-style: dotted;">ELENCO LIBRI</h2>
                 <div class="row card_container">
 
 
@@ -125,7 +163,7 @@
             </div>
         </div>
 
-    </main>
+</main>
 
     <footer class="text-muted">
         <div class="container">
@@ -140,32 +178,38 @@
         let cart = [];
         let removedbooks = [];
         let allbooks = [];
-        
+        let librarycontainer = document.querySelector(".card_container");
+        let cartcontainer = document.querySelector("#cart");
+        let searchcontainer = document.querySelector("#results");
 
 
-        function addToCart(asin) {
-            let thiscard = document.getElementById("cardBody" + asin);
-            if (!cart.includes(asin)) {
-                console.log(thiscard);
+        function addToCart(asin, object, k) {
+            let thiscard = document.getElementById("cardBody" + asin + k);
+            let thisBtn = document.getElementById("addbutton" + asin + k);
+            if (!cart.includes(object)) {
                 thiscard.style.backgroundColor = "lightblue";
-                this.innerHTML = "Remove From Cart";   
-                cart.push(asin);
+                thisBtn.innerHTML = "Remove From Cart";
+                cart.push(object);
+                cartcontainer.innerHTML = "";         
+                printLibrary(cart, cartcontainer, 2)
             }
             else {
                 thiscard.style.backgroundColor = "white";
-                this.innerHTML = "Add to Cart";
-                let index = cart.indexOf(asin);
+                thisBtn.innerHTML = "Add to Cart";
+                let index = cart.indexOf(object);
                 if (index !== -1) {
                     cart.splice(index, 1);
+                    cartcontainer.innerHTML = "";
+                    printLibrary(cart, cartcontainer, 2)
                 }
 
             }
 
         }
 
-        function skipBook(asin) {
-            let thiscard = document.getElementById("cardBody" + asin);
-            let thiscolumn = document.getElementById("thiscolumn" + asin);
+        function skipBook(asin, object, k) {
+            let thiscard = document.getElementById("cardBody" + asin + k);
+            let thiscolumn = document.getElementById("thiscolumn" + asin + k);
             if (!cart.includes(asin)) {
                 removedbooks.push(asin);
                 thiscolumn.remove();
@@ -173,10 +217,9 @@
             else {
                 thiscard.style.backgroundColor = "white";
                 this.innerHTML = "Add to Cart";
-                let index = cart.indexOf(asin);
+                let index = cart.indexof(object);
                 if (index !== -1) {
-                    cart.splice(index, 1);
-                    
+                    cart.splice(index, 1);   
                 }
             }
 
@@ -190,35 +233,35 @@
         //}
         
 
-        function createcard(cover, title, price, category, asin) {
-            let container = document.querySelector(".card_container");
+        function createcard(object, container, k) {
+            //let container = document.querySelector(".card_container");
             let column = document.createElement("div");
             column.className = "col-2";
-            column.id = "thiscolumn" + asin;
+            column.id = "thiscolumn" + object.asin + k;
             container.appendChild(column);
             let card = document.createElement("div");
             card.className = "card mb-4 box-shadow";
-            card.id = "card" + asin;
+            card.id = "card" + object.asin + k;
             column.appendChild(card);
             let img = document.createElement("img");
-            img.src = cover;
+            img.src = object.img;
             img.classname = "card-img-top book_cover";
             card.appendChild(img);
             let cardBody = document.createElement("div");
             cardBody.className = "card-body";
-            cardBody.id = "cardBody" + asin;
+            cardBody.id = "cardBody" + object.asin + k;
             card.appendChild(cardBody);
             let cardText = document.createElement("h6");
             cardText.className = "card-text";
-            cardText.innerHTML = title;
+            cardText.innerHTML = object.title;
             cardBody.appendChild(cardText);
             let bookprice = document.createElement("p");
             bookprice.className = "card-text";
-            bookprice.innerHTML = price + " $";
+            bookprice.innerHTML = object.price + " $";
             cardBody.appendChild(bookprice);
             let book_category = document.createElement("small");
             book_category.className = "text-muted"
-            book_category.innerHTML = category;
+            book_category.innerHTML = object.category;
             cardBody.appendChild(book_category);
             let cardFooter = document.createElement("div");
             cardFooter.className = "d-flex justify-content-between align-items-center";
@@ -232,16 +275,17 @@
             skipBtn.innerHTML = "Skip";
             btngroup.appendChild(skipBtn);
             skipBtn.onclick = function () {
-                skipBook(asin);
+                skipBook(object.asin, object, k);
             }
             let addToCartBtn = document.createElement("button");
             addToCartBtn.type = "button";
             addToCartBtn.className = "btn btn-sm btn-outline-secondary";
             addToCartBtn.innerHTML = "Add to Cart";
+            addToCartBtn.id = "addbutton" + object.asin + k;
             addToCartBtn.onclick = function () {
-                addToCart(asin);
+                addToCart(object.asin, object, k);
             }
-            btngroup.appendChild(addToCartBtn );   
+            btngroup.appendChild(addToCartBtn);   
         }
 
         
@@ -251,33 +295,44 @@
             res.forEach(
                 (el) => {
                     allbooks.push(el);
-                    createcard(el.img, el.title, el.price, el.category, el.asin);
+                    //createcard(el, librarycontainer);
                     
                 }
+                
             )
+            printLibrary(allbooks, librarycontainer, 1)
         }       
         loadLibrary();
 
 
-        function searchImages() {
+        function printLibrary(array, container, k) {
+            for (el of array) {
+                createcard(el, container, k)
+            }
+        }
+
+        
+        
+
+        function searchBooks() {
             let input = document.getElementById("userInput").value;
+            input = input.toLowerCase();
             console.log(input);
-            fetch(`https://api.pexels.com/v1/search?query=${input}`, {
-                headers: {
-                    Authorization: api_key
+            let search_results = [];
+            for (i = 0; i < allbooks.length; i++) {
+                if (!allbooks[i].title.toLowerCase().includes(input)) {
+                    continue;
+                    //console.log("no results");
                 }
-            })
-                .then(resp => {
-                    return resp.json()
-                })
-                .then(data => {
-                    console.log(data)
-                    for (i = 0; i < 12; i++) {
-                        
+                else {
+                    search_results.push(allbooks[i]);
+                    
+                }
+            }
+            console.log(search_results);
+            searchcontainer.innerHTML = "";
+            printLibrary(search_results, searchcontainer, 3)
 
-                    }
-
-                })
         }
 
 
