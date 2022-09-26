@@ -1,161 +1,106 @@
-﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD</title>
     <style>
         body {
             display: flex;
-            width:100vw;
+            width: 100vw;
             margin: 0;
         }
-        #prodotti{
+        #prodotti, #forms {
             width: 50%;
-            background-color: wheat;
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+            padding:20px;
         }
 
-        #forms{
+        #prodotti {
+            background-color: wheat;
+        }
+        #forms {
             background-color:aliceblue;
-            width: 50%;
+        }
+
+        .card {
+            border: solid 1px black;
+            width: 90%;
+            position: relative;
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+            padding:20px;
+        }
+
+        .card h4 {
+            margin-top: 5px;
+        }
+
+        #caricamento {
+            position: fixed;
+            top: 0;bottom: 0;left: 0;right: 0;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            background-color:rgba(0, 0, 0, 0.456);
+            font-size: 3rem;
+            font-weight: bold;
+            z-index: 99;
+        }
+
+        #errore {
+            position: fixed;
+            top: 0;bottom: 0;left: 0;right: 0;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            background-color:rgba(255, 0, 0, 0.756);
+            font-size: 3rem;
+            font-weight: bold;
+            z-index: 999;
+        }
+
+        .hidden {
+            display: none!important;
         }
     </style>
 </head>
 <body>
-    <div id="prodotti"> </div>
+
+    <div id="errore" class="hidden">
+        <span id="msgError">ERRORE</span>
+        <button onclick="document.getElementById('errore').classList.add('hidden')">chiudi</button>
+    </div>
+    <div id="caricamento" class="hidden">
+        Caricamento in corso...
+    </div>
+
+    <div id="prodotti">
+    </div>
+
     <div id="forms">
-        <form id="createform">
-            <h1>Nuovo Prodotto</h1>
-            <input type="text" name="name" id="name">
-            <input type="text" name="price" id="price" step="0.01">
+        <form id="createForm">
+            <h1>Nuovo prodotto</h1>
+            <!-- In un form inseriamo nel name il nome della proprietà dell'oggeto -->
+            <input type="text" name="name" id="name" required>
+            <input type="number" name="price" id="price" step="0.01" min="0" required>
             <button type="submit">CREA</button>
         </form>
+
+        <form id="updateForm" class="hidden">
+            <h1>Modifica prodotto</h1>
+            <input type="hidden" name="id" id="id" required>
+            <!-- In un form inseriamo nel name il nome della proprietà dell'oggeto -->
+            <input type="text" name="name" id="name" required>
+            <input type="number" name="price" id="price" step="0.01" min="0" required>
+            <button type="submit">SALVA</button>
+        </form>
     </div>
+
+    <script src="script.js"></script>
 </body>
-<script>
-
-    window.onload = async  function(){}
-    
-    
-    let url = "http://localhost:3000/";
-
-    //1 lettura dei prodotti
-    async  function getProdotti(){
-        let response = await fetch(url + "/prodotti");
-        let res = response.json();
-        return res;
-    }
-
-    //2 Creare la card
-
-    function createCard (prod){
-        let card = document.createElement("div");
-        card.classList.add = "card";
-        let prodTitle = document.createElement("h4");
-        prodTitle.innerText = prod.name;
-        let prodPrice = document.createElement("b");
-        prodPrice.innerText = prod.price;
-        
-        card.appendChild(prodTitle)
-        card.appendChild(prodPrice)
-
-        document.getElementById("prodotti").appendChild();
-
-    }
-
-
-    //CREATE; POST aggiungo un prodotto
-
-    let nuovoProdotto = {
-        name: "Prodotto3",
-        price: 200
-
-    }
-
-
-    async function createProdotto(p)
-    {
-    fetch(url, {
-        method: "POST",
-        headers: {
-            "content-type": "application/json"
-
-        },
-        body: JSON.stringify(p)
-    })
-    
-    console.log ("CREATE", "RESPONSE", response);
-    let res = await response.json();
-    console.log ("CREATE", "RES", res);
-
-    }
-
-
-
-    //RETRIEVE - GET - leggo un prodotto o la lista di prodotti
-
-    async function retrieveAllProdotti (){
-        let response = await fetch(url);
-        console.log ("RETRIEVE ALL", "RESPONSE", response);
-        let res = await response.json();
-        console.log ("RETRIEVE ALL", "RES", res);
-
-    }
-
-    async function retrieveProdotto(id){
-        let response = await fetch(url + '/'+ id);
-    }
- 
-    // UPDATE- PUT- modificare un prodotto
-    // url -> url della risorsa da modificare
-    //optins:
-        let options = {
-        method: "PUT",
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify()
-        //nel body vanno solo le proprietà da modificare ma spesso per sicurezza conviene inviare l'intero oggetto
-    }
-    // return sarà l'oggetto modificato
-     
-    async function updateprodotto (id, p){
-        let updateUrl = url + id;
-        let updateOptions = {
-        method: "PUT",
-        headers: {
-            "content-type": "application/json"
-        },
-    }
-
-        let response = await fetch(updateUrl, updateOptions);
-        console.log ("UPDATE", "RESPONSE", response);
-        let res = await response.json();
-        console.log ("UPDATE", "RES", res);
-       
-    }
-    //DELETE
-
-         
-    async function deleteProdotto (id){
-        let deleteUrl = url + id;
-        let deleteOptions = {
-        method: "DELETE",
-        headers: {
-            "content-type": "application/json"
-        },
-    }
-        let response = await fetch(deleteUrl, deleteOptions);
-        console.log ("DELETE", "RESPONSE", response);
-        let res = await response.json();
-        console.log ("DELETE", "RES", res);
-        
-    }
-
-</script>
 </html>
-
