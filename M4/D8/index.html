@@ -6,35 +6,16 @@
     <title></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <style>
-        :root {
-            --jumbotron-padding-y: 3rem;
+        main {
+            display: flex;
+            flex-direction: row;
         }
-
-        .jumbotron {
-            padding-top: var(--jumbotron-padding-y);
-            padding-bottom: var(--jumbotron-padding-y);
-            margin-bottom: 0;
-            background-color: #fff;
-        }
-
-        @media (min-width: 768px) {
-            .jumbotron {
-                padding-top: calc(var(--jumbotron-padding-y) * 2);
-                padding-bottom: calc(var(--jumbotron-padding-y) * 2);
-            }
-        }
-
-        .jumbotron p:last-child {
-            margin-bottom: 0;
-        }
-
-        .jumbotron-heading {
-            font-weight: 300;
-        }
-
-        .jumbotron .container {
-            max-width: 40rem;
-        }
+       .forms{
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+       }
 
         footer {
             padding-top: 3rem;
@@ -57,13 +38,8 @@
             visibility: hidden;
         }
 
-        #inCart {
-            background-color: lightblue;
-        }
 
-        #cart {
-            background-color: #cef1c0;
-        }
+
 
 
         #caricamento {
@@ -119,21 +95,7 @@
         </div>
     </header>
 
-    <main role="main">
-
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Library</h1>
-
-                <form id="form" onsubmit="return false;">
-                    <input type="text" id="userInput" />
-                    <input type="submit" onclick="searchBooks();" />
-                </form>
-
-                <a href="#" class="btn btn-primary my-2" onclick="() => { console.log(cart) }">Load Cart</a>
-                <a href="#" class="btn btn-secondary my-2" onclick="createcard()">Load Secondary Images</a>
-            </div>
-        </section>
+    <main role="main"> 
         <div id="errore" class="hidden">
             <span id="msgError">ERRORE</span>
             <button onclick="document.getElementById('errore').classList.add('hidden')">chiudi</button>
@@ -141,72 +103,41 @@
         <div id="caricamento" class="hidden">
             Caricamento in corso...
         </div>
-        <div class="album py-5 bg-light">
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Aggiungi prodotti
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="container">
-                                <div class="row" id="addProduct">
-                                    <form id="createForm">
-                                        <h6>Nuovo Prodotto</h6>
-                                        <input type="text" name="name" id="name" placeholder="nome prodotto" required>
-                                        <input type="text" name="description" id="description" placeholder="descrizione" required>
-                                        <input type="text" name="brand" id="brand" placeholder="brand" required>
-                                        <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
-                                        <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
+        <div class="forms">
+            <div class="" id="addProduct">
+                <form id="createForm">
+                    <h6>Aggiungi Prodotto</h6>
+                    <input type="text" name="name" id="name" placeholder="nome prodotto" required>
+                    <input type="text" name="description" id="description" placeholder="descrizione" required>
+                    <input type="text" name="brand" id="brand" placeholder="brand" required>
+                    <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
+                    <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
 
-                                        <button type="submit">CREA</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <button type="submit">CREA</button>
+                </form>
             </div>
+            <div>
+                <form id="updateForm" class="hidden">
+                <h6>Modifica</h6>
+                <input type="text" name="name" id="name" placeholder="nome prodotto" required>
+                <input type="text" name="description" id="description" placeholder="descrizione" required>
+                <input type="text" name="brand" id="brand" placeholder="brand" required>
+                <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
+                <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
 
-
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Risultati ricerca
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="container">
-                                <div class="row" id="results">
-                                    <form id="updateForm" class="hidden">
-                                        <h6>Modifica</h6>
-                                        <input type="text" name="name" id="name" placeholder="nome prodotto" required>
-                                        <input type="text" name="description" id="description" placeholder="descrizione" required>
-                                        <input type="text" name="brand" id="brand" placeholder="brand" required>
-                                        <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
-                                        <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
-
-                                        <button type="submit">MODIFICA</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button type="submit" id="modificaButton">MODIFICA</button>
+            </form>
             </div>
+        </div>                 
 
-            <div class="container">
-                <h2 style="margin: 3em 0; border-bottom: 2px; border-bottom-style: dotted;">PRODOTTI</h2>
-                <div class="row" id="products">
+        <div class="container">
+            <h2 style="margin: 3em 0; border-bottom: 2px; border-bottom-style: dotted;">PRODOTTI</h2>
+            <div class="row" id="products">
 
 
-                </div>
             </div>
         </div>
+       
 
     </main>
 
@@ -223,6 +154,7 @@
         let url = "https://striveschool-api.herokuapp.com/api/product/";
         let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMwN2NhOTQwYWU2YTAwMTU0ZmJiNGQiLCJpYXQiOjE2NjQxMjIwMjYsImV4cCI6MTY2NTMzMTYyNn0.KE1ac056HpuPlBhtTwK5lNWpmII8qeBR1v7VPRFX6VU";
         let dummies = [];
+     
 
         window.onload = async function () {
             let products = await getProducts();
@@ -295,7 +227,6 @@
             column.id = "thiscolumn" + object._id;
             let card = document.createElement("div");
             card.className = "card mb-4 box-shadow";
-            card.id = "card" + object._id;
             column.appendChild(card);
             let img = document.createElement("img");
             img.src = object.imageUrl;
@@ -303,7 +234,6 @@
             card.appendChild(img);
             let cardBody = document.createElement("div");
             cardBody.className = "card-body";
-            cardBody.id = "cardBody" + object._id;
             card.appendChild(cardBody);
             let cardText = document.createElement("h6");
             cardText.className = "card-text";
@@ -338,10 +268,17 @@
             //btngroup.appendChild(addToCartBtn);
             let deleteButton = generaDeleteButton(object._id)
             let updateButton = generaUpdateButton(object)
+            let pagebutton = generaPaginaButton(object)
 
             card.appendChild(deleteButton)
             card.appendChild(updateButton)
+            card.appendChild(pagebutton)
 
+            cards.push({
+                id: object._id,
+                element: card
+            })
+            
 
             return column;
 
@@ -417,16 +354,11 @@
         }
 
 
-        async function deleteAllproducts(products) {
-            for (let i = 0; i < products.length; i++) {
-                deleteProduct(products[i].id);
-            }
-        }
 
 
 
 
-        async function updateprodotto(id, prod) {
+        async function updateProdotto(id, prod) {
             let updateUrl = url + id;
             let updateOptions = {
                 method: "PUT",
@@ -461,17 +393,27 @@
         }
 
 
-        function myFunction() {
+        function createPage() {
             const myWindow = window.open();
             myWindow.document.write("<h1>New Window</h1>");
             myWindow.document.write("<p>Hello World!</p>");
         }
 
-
-
-
-
-
+        function generaPaginaButton(prod) {
+            let paginaButton = document.createElement("button")
+            paginaButton.style.background = "blue"
+            paginaButton.innerText = "Informazioni"
+            paginaButton.addEventListener("click", async () => {
+                const myWindow = window.open();
+                myWindow.document.write(`<img src="${prod.imageUrl}" />`);
+                myWindow.document.write(`<h1>${prod.name}</h1>`);
+                myWindow.document.write(`<p>${prod.description}</p>`);
+                myWindow.document.write(`<p>${prod.price} $</p>`);
+                    
+                
+            })
+            return paginaButton
+        }
 
 
 
@@ -482,48 +424,49 @@
             updateButton.innerText = "Modifica"
             updateButton.addEventListener("click", () => {
                 let updateForm = document.getElementById("updateForm")
+                let modificaButton = document.getElementById("modificaButton")
                 updateForm[0].value = prod.name
                 updateForm[1].value = prod.description
                 updateForm[2].value = prod.brand
                 updateForm[3].value = prod.imageUrl
                 updateForm[4].value = prod.price
+                updateForm.addEventListener("submit", (e) => { e.preventDefault(); updatebutton(prod._id)} )
                 updateForm.classList.remove("hidden")
-                document.getElementById("updateForm").addEventListener("submit", async (e) => {
-                    e.preventDefault()
-                    if (confirm("Sei sicuro di voler modificare il prodotto?")) {
-                        let prodotto = {
-                            name: e.target[0].value,
-                            description: e.target[1].value,
-                            brand: e.target[2].value,
-                            imageUrl: e.target[3].value,
-                            price: e.target[4].value
-                        }
-                        let prodottoModificato = await updateProdotto(prod._id, prodotto)
-                        let cardDaModificare = cards.find(c => c.id == e.target[0].value)
-                        cardDaModificare.element.getElementsByTagName("b").innerText = e.target[2].value + "€"
-                    }
-                })
             })
 
             return updateButton
         }
 
+ 
 
-        document.getElementById("updateForm").addEventListener("submit", async (e) => {
-            e.preventDefault()
+
+        async function updatebutton (id) {
+
+            let updateForm = document.getElementById("updateForm")
             if (confirm("Sei sicuro di voler modificare il prodotto?")) {
                 let prodotto = {
-                    name: e.target[0].value,
-                    description: e.target[1].value,
-                    brand: e.target[2].value,
-                    imageUrl: e.target[3].value,
-                    price: e.target[4].value
+                    name: updateForm[0].value,
+                    description: updateForm[1].value,
+                    brand: updateForm[2].value,
+                    imageUrl: updateForm[3].value,
+                    price: updateForm[4].value
                 }
-                let prodottoModificato = await updateProdotto(e.target[0].value, prodotto)
-                let cardDaModificare = cards.find(c => c.id == e.target[0].value)
-                cardDaModificare.element.getElementsByTagName("b").innerText = e.target[2].value + "€"
+                console.log(prodotto)
+                let prodottoModificato = await updateProdotto(id, prodotto)
+                let cardDaModificare = document.getElementById("thiscolumn" + id)
+                cardDaModificare.getElementsByTagName("h6").innerText = e.target[0].value
+                cardDaModificare.getElementsByTagName("small").innerText = e.target[1].value
+                cardDaModificare.getElementsByTagName("img").src = e.target[3].value
+                cardDaModificare.getElementsByTagName("p").innerText = e.target[4].value
             }
-        })
+            window.location.reload();
+        }
+
+
+
+
+
+       
 
         function apriCaricamento() {
             // document.getElementById("prodotti").innerHTML = "Caricamento..."

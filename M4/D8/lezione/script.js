@@ -144,7 +144,7 @@ function creaCard(prod) {
     card.appendChild(updateButton)
 
     cards.push({
-        id: prod.id,
+        id: prod._id,
         element: card
     })
 
