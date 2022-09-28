@@ -1,0 +1,667 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        main {
+            display: flex;
+            flex-direction: row;
+        }
+       .forms{
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+       }
+
+        footer {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+            footer p {
+                margin-bottom: .25rem;
+            }
+
+        .box-shadow {
+            box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #hidden {
+            visibility: hidden;
+        }
+
+
+
+
+
+        #caricamento {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.456);
+            font-size: 3rem;
+            font-weight: bold;
+            z-index: 99;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">About</h4>
+                        <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">Contact</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                            <li><a href="#" class="text-white">Like on Facebook</a></li>
+                            <li><a href="#" class="text-white">Email me</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    <strong>Album</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main role="main"> 
+        <div id="errore" class="hidden">
+            <span id="msgError">ERRORE</span>
+            <button onclick="document.getElementById('errore').classList.add('hidden')">chiudi</button>
+        </div>
+        <div id="caricamento" class="hidden">
+            Caricamento in corso...
+        </div>
+        <div class="forms">
+            <div class="" id="addProduct">
+                <form id="createForm">
+                    <h6>Aggiungi Prodotto</h6>
+                    <input type="text" name="name" id="name" placeholder="nome prodotto" required>
+                    <input type="text" name="description" id="description" placeholder="descrizione" required>
+                    <input type="text" name="brand" id="brand" placeholder="brand" required>
+                    <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
+                    <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
+
+                    <button type="submit">CREA</button>
+                </form>
+            </div>
+            <div>
+                <form id="updateForm" class="hidden">
+                <h6>Modifica</h6>
+                <input type="text" name="name" id="name" placeholder="nome prodotto" required>
+                <input type="text" name="description" id="description" placeholder="descrizione" required>
+                <input type="text" name="brand" id="brand" placeholder="brand" required>
+                <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
+                <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
+
+                <button type="submit" id="modificaButton">MODIFICA</button>
+            </form>
+            </div>
+        </div>                 
+
+        <div class="container">
+            <h2 style="margin: 3em 0; border-bottom: 2px; border-bottom-style: dotted;">PRODOTTI</h2>
+            <table id="products">
+
+            </table>
+        </div>
+       
+
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+            <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+            <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        </div>
+    </footer>
+    <script>
+        let url = "https://striveschool-api.herokuapp.com/api/product/";
+        let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzMwN2NhOTQwYWU2YTAwMTU0ZmJiNGQiLCJpYXQiOjE2NjQxMjIwMjYsImV4cCI6MTY2NTMzMTYyNn0.KE1ac056HpuPlBhtTwK5lNWpmII8qeBR1v7VPRFX6VU";
+        let dummies = [];
+     
+
+        window.onload = async function () {
+            let products = await getProducts();
+            console.log(products);
+            products.forEach((p) => {
+                let c = createCard(p)
+                document.getElementById("products").appendChild(c)
+            })
+
+            document.getElementById("createForm").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                let prodotto = {
+                    name: e.target[0].value,
+                    description: e.target[1].value,
+                    brand: e.target[2].value,
+                    imageUrl: e.target[3].value,
+                    price: e.target[4].value
+                }
+                let nuovoProdotto = await createProdotto(prodotto)
+                let c = createCard(nuovoProdotto)
+                document.getElementById("products").appendChild(c)
+            })
+        }
+
+
+
+
+
+
+        //1 lettura dei prodotti
+        async function getProducts() {
+            apriCaricamento()
+            let response = await fetch(url,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                        "Authorization": token
+
+                    }
+                });
+            let res = response.json();
+            chiudiCaricamento()
+            return res;
+        }
+
+        //
+        async function loadDummies() {
+            let res = await fetch("https://dummyjson.com/products");
+            res = await res.json();
+            res.products.forEach(
+                (el) => {
+                    let dummie = {
+                        name: el.title,
+                        description: el.description,
+                        brand: el.brand,
+                        imageUrl: el.thumbnail,
+                        price: el.price,
+
+                    }
+                    dummies.push(dummie);
+                })
+        }
+        loadDummies();
+
+        function createTr(prod) {
+            let tr = document.createElement("tr");
+            let name = document.createElement("td");
+            let description = document.createElement("td");
+            let brand = document.createElement("td");
+            let imageUrl = document.createElement("td");
+            let image = document.createElement("img");
+            imageUrl.appendChild(image)
+            let price = document.createElement("td");
+
+            name.innerHTML = prod.name;
+            description.innerHTML = prod.description;
+            brand.innerHTML = prod.brand;
+            image.src = prod.imageUrl;
+            price.src = prod.price;
+
+
+        }
+
+        function createCard(object) {
+            let column = document.createElement("div");
+            column.className = "col-2";
+            column.id = "thiscolumn" + object._id;
+            let card = document.createElement("div");
+            card.className = "card mb-4 box-shadow";
+            column.appendChild(card);
+            let img = document.createElement("img");
+            img.src = object.imageUrl;
+            img.classname = "card-img-top book_cover";
+            card.appendChild(img);
+            let cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+            card.appendChild(cardBody);
+            let cardText = document.createElement("h6");
+            cardText.className = "card-text";
+            cardText.innerHTML = object.name;
+            cardBody.appendChild(cardText);
+            let bookprice = document.createElement("p");
+            bookprice.className = "card-text";
+            bookprice.innerHTML = object.price + " $";
+            cardBody.appendChild(bookprice);
+            let book_category = document.createElement("small");
+            book_category.className = "text-muted"
+            book_category.innerHTML = object.description;
+            cardBody.appendChild(book_category);
+            let cardFooter = document.createElement("div");
+            cardFooter.className = "d-flex justify-content-between align-items-center";
+            cardBody.appendChild(cardFooter);
+            let btngroup = document.createElement("div");
+            btngroup.className = "btn-group"
+            cardFooter.appendChild(btngroup);
+            //let skipBtn = document.createElement("button");
+            //skipBtn.type = "button";
+            //skipBtn.className = "btn btn-sm btn-outline-secondary";
+            //skipBtn.innerHTML = "Delete";
+            //btngroup.appendChild(skipBtn);
+            //skipBtn.onclick = function () { }
+            //let addToCartBtn = document.createElement("button");
+            //addToCartBtn.type = "button";
+            //addToCartBtn.className = "btn btn-sm btn-outline-secondary";
+            //addToCartBtn.innerHTML = "Add to Cart";
+            //addToCartBtn.id = "addbutton";
+            //addToCartBtn.onclick = function () { }
+            //btngroup.appendChild(addToCartBtn);
+            let deleteButton = generaDeleteButton(object._id)
+            let updateButton = generaUpdateButton(object)
+            let pagebutton = generaPaginaButton(object)
+
+            card.appendChild(deleteButton)
+            card.appendChild(updateButton)
+            card.appendChild(pagebutton)
+
+
+            
+
+            return column;
+
+        }
+
+        //function createcard(prod) {
+        //   let card = document.createelement("div");
+        //   card.classlist.add = "card";
+        //   let prodtitle = document.createelement("h4");
+        //   prodtitle.innertext = prod.name;
+        //   let prodprice = document.createelement("b");
+        //   prodprice.innertext = prod.price;
+
+        //   card.appendchild(prodtitle)
+        //   card.appendchild(prodprice)
+
+        //   return card;
+
+        //}
+
+
+
+        async function createProdotto(p) {
+            apriCaricamento()
+            let response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": token
+
+                },
+                body: JSON.stringify(p)
+            })
+
+            let res = await response.json();
+            chiudiCaricamento()
+            return res
+
+        }
+
+
+
+
+        async function deleteProduct(id) {
+            apriCaricamento()
+            let deleteUrl = url + id;
+            let deleteOptions = {
+                method: "DELETE",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": token
+                },
+            }
+            let response = await fetch(deleteUrl, deleteOptions);
+            let res = await response.json();
+            chiudiCaricamento()
+            if (response.status == 200) return true
+            return false
+        }
+
+        async function retrieveProdotto(id) {
+            apriCaricamento()
+            let response = await fetch(url + '/' + id, url,
+                {
+                    headers: {
+                        "content-type": "application/json",
+                        "Authorization": token
+
+                    }
+                });
+            chiudiCaricamento()
+            return response;
+        }
+
+
+
+
+
+
+        async function updateProdotto(id, prod) {
+            let updateUrl = url + id;
+            let updateOptions = {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": token
+                },
+                body: JSON.stringify(prod)
+            }
+
+            let response = await fetch(updateUrl, updateOptions);
+            let res = await response.json();
+            return res
+
+        }
+
+
+        function generaDeleteButton(id) {
+            let deleteButton = document.createElement("button")
+            deleteButton.style.background = "red"
+            deleteButton.innerText = "Elimina"
+            deleteButton.addEventListener("click", async () => {
+                if (confirm("Confermare l'eliminazione?")) {
+                    if (await deleteProduct(id)) {
+                        let cardToDelete = document.getElementById("thiscolumn" + id);
+                        cardToDelete.remove();
+                    }
+                }
+            })
+
+            return deleteButton
+        }
+
+
+        function createPage() {
+            const myWindow = window.open();
+            myWindow.document.write("<h1>New Window</h1>");
+            myWindow.document.write("<p>Hello World!</p>");
+        }
+
+        function generaPaginaButton(prod) {
+            let paginaButton = document.createElement("button")
+            paginaButton.style.background = "blue"
+            paginaButton.innerText = "Informazioni"
+            paginaButton.addEventListener("click", async () => {
+                const myWindow = window.open();
+                myWindow.document.write(`<img src="${prod.imageUrl}" />`);
+                myWindow.document.write(`<h1>${prod.name}</h1>`);
+                myWindow.document.write(`<p>${prod.description}</p>`);
+                myWindow.document.write(`<p>${prod.price} $</p>`);
+                    
+                
+            })
+            return paginaButton
+        }
+
+
+
+
+        function generaUpdateButton(prod) {
+            let updateButton = document.createElement("button")
+            updateButton.style.background = "green"
+            updateButton.innerText = "Modifica"
+            updateButton.addEventListener("click", () => {
+                let updateForm = document.getElementById("updateForm")
+                let modificaButton = document.getElementById("modificaButton")
+                updateForm[0].value = prod.name
+                updateForm[1].value = prod.description
+                updateForm[2].value = prod.brand
+                updateForm[3].value = prod.imageUrl
+                updateForm[4].value = prod.price
+                updateForm.addEventListener("submit", (e) => { e.preventDefault(); updatebutton(prod._id)} )
+                updateForm.classList.remove("hidden")
+            })
+
+            return updateButton;
+        }
+
+ 
+
+
+        async function updatebutton (id) {
+
+            let updateForm = document.getElementById("updateForm")
+            if (confirm("Sei sicuro di voler modificare il prodotto?")) {
+                let prodotto = {
+                    name: updateForm[0].value,
+                    description: updateForm[1].value,
+                    brand: updateForm[2].value,
+                    imageUrl: updateForm[3].value,
+                    price: updateForm[4].value
+                }
+                console.log(prodotto)
+                let prodottoModificato = await updateProdotto(id, prodotto)
+                let cardDaModificare = document.getElementById("thiscolumn" + id)
+                cardDaModificare.getElementsByTagName("h6").innerText = e.target[0].value
+                cardDaModificare.getElementsByTagName("small").innerText = e.target[1].value
+                cardDaModificare.getElementsByTagName("img").src = e.target[3].value
+                cardDaModificare.getElementsByTagName("p").innerText = e.target[4].value
+            }
+            window.location.reload();
+        }
+
+
+
+
+
+       
+
+        function apriCaricamento() {
+            // document.getElementById("prodotti").innerHTML = "Caricamento..."
+            document.getElementById("caricamento").classList.remove("hidden")
+        }
+
+        function chiudiCaricamento() {
+            // document.getElementById("prodotti").innerHTML = ""
+            document.getElementById("caricamento").classList.add("hidden")
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<!--# ESERCIZI
+# ESERCIZI
+
+### E-COMMERCE FRONT PAGE & BACK OFFICE
+
+Il tuo obbiettivo è di creare un finto e-commerce con le funzionalità di gestione dei prodotti.
+
+Le features da implementare sono:
+
+– Una frontpage, dove si vedono tutti i prodotti
+– A backoffice da cui aggiungere nuovi prodotti
+– Nella frontpage, aggiungi un loader che sia visibile mentre l’API elabora i dati.
+– Cliccando su un prodotto, l’utente deve essere reindirizzato ad una pagina prodotto. Passa l’id come query string nell’URL.
+– Nel backoffice, aggiungi la funzionalità per modificare un prodotto e un pulsante per eliminarlo.
+– Aggiungi una validazione dei prodotti in face di creazione o modifica usando gli alert di bootstrap
+
+Nel backoffice, implementa un form per aggiungere un nuovo prodotto al database. Il prodotto deve essere strutturato così:
+
+“`jsx
+{
+“_id”: “5d318e1a8541744830bef139”, // SERVER GENERATED
+“name”: “3310 cellphone”, // REQUIRED
+“description”: “An unforgettable icon.”, // REQUIRED
+“brand”: “Nokia”, // REQUIRED
+“imageUrl”: “https://bit.ly/3CExjRa”, // REQUIRED
+“price”: 100, // REQUIRED
+“userId”: “admin”, // SERVER GENERATED
+“createdAt”: “2021-09-19T09:32:10.535Z”, // SERVER GENERATED
+“updatedAt”: “2021-09-19T09:32:10.535Z”, // SERVER GENERATED
+“__v”: 0 // SERVER GENERATED
+}
+“`
+
+I campi che dicono “REQUIRED” sono obbligatori. Quelli “SERVER GENERATED”, invece, non serve che siano inviati all’API.
+
+L’endpoint è:
+
+`[https://striveschool-api.herokuapp.com/api/product/](https://striveschool-api.herokuapp.com/api/product/)`
+
+Sia per GET che per POST.
+
+🛑 **IMPORTANTE** 🛑
+
+OGNI CHIAMATA DEVE ESSERE AUTENTICATE.
+
+Ogni richiesta a questo API deve includere un token per ottenere l’accesso.
+
+Puoi ottenere il token qui: [https://strive.school/studentlogin](https://strive.school/studentlogin)
+
+Esempio:
+
+“`jsx
+fetch(‘https://striveschool-api.herokuapp.com/api/product/’, {
+headers: {
+Authorization: ‘Bearer XXXXXXXXXXXXXXXXX’
+}
+})
+“`
+
+Dove “XXXXXXXXXXXXXXXXX“ deve essere sostituito dal token preso dalla pagina menzionata in precedenza.
+
+Il token dura 14 giorni, se te ne serve uno nuovo, puoi ottenerlo con la seguente richiesta:
+
+“`jsx
+method: “POST”
+endpoint: “https://striveschool-api.herokuapp.com/api/account/login”
+request body:
+{
+“username”: // the username you registered with,
+“password”: // the password you registered with
+}
+“`
+
+
+
+Il tuo obbiettivo è creare una pagina che gestisca i prodotti di un e-commerce.
+
+Le task di oggi:
+
+– Nella frontpage, aggiungi un loader che sia visibile mentre l’API elabora i dati.---
+– Cliccando su un prodotto, l’utente deve essere reindirizzato ad una pagina prodotto. Passa l’id come query string nell’URL.
+– Nella pagina prodotto, mostra le informazioni del prodotto su cui si è cliccato. Puoi prendere le informazioni dall’endpoint “product/IL TUO ID QUI”
+– Nel backoffice, aggiungi la funzionalità per modificare un prodotto e un pulsante per eliminarlo.
+– Aggiungi una validazione dei prodotti in face di creazione o modifica usando gli alert di bootstrap
+
+l prodotto deve essere strutturato così:
+
+“`jsx
+{
+“_id”: “5d318e1a8541744830bef139”, // SERVER GENERATED
+“name”: “3310 cellphone”, // REQUIRED
+“description”: “An unforgettable icon.”, // REQUIRED
+“brand”: “Nokia”, // REQUIRED
+“imageUrl”: “https://bit.ly/3CExjRa”, // REQUIRED
+“price”: 100, // REQUIRED
+“userId”: “admin”, // SERVER GENERATED
+“createdAt”: “2021-09-19T09:32:10.535Z”, // SERVER GENERATED
+“updatedAt”: “2021-09-19T09:32:10.535Z”, // SERVER GENERATED
+“__v”: 0 // SERVER GENERATED
+}
+“`
+
+I campi che dicono “REQUIRED” sono obbligatori. Quelli “SERVER GENERATED”, invece, non serve che siano inviati all’API.
+
+L’endpoint è:
+
+`[https://striveschool-api.herokuapp.com/api/product/](https://striveschool-api.herokuapp.com/api/product/)`
+
+Sia per GET che per POST.
+
+Per PUT e DELETE è necessario specificare l’id
+
+`https://striveschool-api.herokuapp.com/api/product/id`
+
+🛑 **IMPORTANTE** 🛑
+
+OGNI CHIAMATA DEVE ESSERE AUTENTICATE.
+
+Ogni richiesta a questo API deve includere un token per ottenere l’accesso.
+
+Puoi ottenere il token qui: [https://strive.school/studentlogin](https://strive.school/studentlogin)
+
+Esempio:
+
+“`jsx
+fetch(‘https://striveschool-api.herokuapp.com/api/product/’, {
+headers: {
+Authorization: ‘Bearer XXXXXXXXXXXXXXXXX’
+}
+})
+“`
+
+Dove “XXXXXXXXXXXXXXXXX“ deve essere sostituito dal token preso dalla pagina menzionata in precedenza.
+
+Il token dura 14 giorni, se te ne serve uno nuovo, puoi ottenerlo con la seguente richiesta:
+
+“`jsx
+method: “POST”
+endpoint: “https://striveschool-api.herokuapp.com/api/account/login”
+request body:
+{
+“username”: // the username you registered with,
+“password”: // the password you registered with
+}
+“`
+
+Puoi iniziare con il template allegato.
+
+### 🔴 CENTRO RISOLUZIONE PROBLEMI / FAQ:
+
+Imparare a leggere gli errori è fondamentale**! ✨**
+
+**Ricevo solo un array vuoto, perché?**
+
+L’API ti invierà solo i prodotti che TU hai aggiunti. Prova a creare qualcosa con POST e controlla di nuovo.
+
+**Ricevo un errore 500, come posso risolvere?**
+
+Controlla nella network tab del tuo inspector per vedere l’errore specifico.
+Solitamente
+
+1. Ti manca un field nel corpo
+2. Hai una “duplicate key”, cioè il nome del prodotto esiste già
+3. Hai inviato il tipo sbagliato di dati (una stringa invece di un numero o simili)
+
+
+
+    tenere presente document.write() come metodo per generare una pagina
+    window.location.href
+    come passare i dati da una pagina a a una pagina b-->
