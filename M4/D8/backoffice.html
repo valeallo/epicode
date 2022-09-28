@@ -18,7 +18,11 @@
             border-radius: 20px;
         }
 
-
+        .forms {
+            background-color: #a5d8ce;
+            padding: 3em;
+            border-radius: 20px;
+        }
 
         .prodTr {
             margin-top: 2em;
@@ -30,6 +34,9 @@
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
+        }
+        input {
+            margin: 0.5em;
         }
 
         footer {
@@ -126,7 +133,7 @@
                     <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
                     <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
 
-                    <button type="submit">CREA</button>
+                    <button class="btn btn-light" type="submit">CREA</button>
                 </form>
             </div>
             <div>
@@ -138,7 +145,7 @@
                     <input type="text" name="imgUrl" id="imgUrl" placeholder="URL immagine" required>
                     <input type="text" name="price" id="price" step="0.01" placeholder="prezzo" required>
 
-                    <button type="submit" id="modificaButton">MODIFICA</button>
+                    <button type="submit" class="btn btn-light" id="modificaButton">MODIFICA</button>
                 </form>
             </div>
         </div>
