@@ -1,0 +1,82 @@
+﻿body
+{
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10vh;
+}
+
+.prods {
+    border: 2px solid green;
+    padding: 3em;
+    border-radius: 20px;
+}
+
+.forms {
+    background-color: #a5d8ce;
+    padding: 3em;
+    border-radius: 20px;
+}
+
+.prodTr {
+    margin-top: 2em;
+    width: 100%;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+input {
+    margin: 0.5em;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+    footer p {
+        margin-bottom: .25rem;
+    }
+
+
+
+.image {
+    width: 40px;
+    height: 40px;
+}
+
+
+td {
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 4vw;
+    height: 2vh;
+}
+
+
+#caricamento {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.456);
+    font-size: 3rem;
+    font-weight: bold;
+    z-index: 99;
+}
+
+.hidden {
+    display: none !important;
+}
