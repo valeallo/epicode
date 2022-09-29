@@ -5,38 +5,52 @@
     <meta charset="utf-8" />
     <title></title>
     <style>
-        
-        .paginaMain{
+
+        .pagina {
             height: 100%;
             width: 100%;
-            background-color: lightseagreen;
-            
+            background-color: #7FA39C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
         }
 
-        .paginaProd{
+        .pagina main{
             display: flex;
             flex-direction: row;
-            width: 50vw;
+            background-color: white;
+            border-radius: 25px;
+            padding: 2em;
+            border: 2px dotted green;
+            justify-content: space-evenly;
         }
+
+        .pagina div{
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: center;
+            padding: 2em 0;
+        }
+
 
     </style>
 </head>
-<body>
-
  
-            <main class="paginaMain">
-                <div class="paginaProd">
-                    <div>
-                        <img src="https://bit.ly/3CExjRa" />
-                    </div>
-                    <div>
-                        <h1>NAMENAME</h1>
-                        <p>Brand</p>
-                        <p>Lorem Ipsum bla bla bla bla bla</p>
-                        <b>15 $</b>
-                    </div>
-                </div>
-            </main>
+    <body class="pagina">
+        <main>
+            <div id="img">
+                <img src="https://bit.ly/3CExjRa" />
+            </div>
+            <div>
+                <h1>NOKIA</h1>
+                <b>NOKIA</b>
+                <p>hjbsdkilòsdhnciljs</p>
+                <p>15 $</p>
+            </div>
+        </main>
+    </body>
   
-</body>
 </html>

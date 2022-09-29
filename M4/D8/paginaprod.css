@@ -1,0 +1,28 @@
+﻿.pagina {
+    height: 100%;
+    width: 100%;
+    background-color: #7FA39C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.pagina main {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2em;
+    border: 2px dotted green;
+    justify-content: space-evenly;
+}
+
+.pagina div {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    padding: 2em 0;
+}

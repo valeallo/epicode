@@ -37,12 +37,12 @@ function createCard(object) {
     let description = document.createElement("small");
 
 
-    column.className = "col-2";
+    column.className = "col-6 col-md-3 col-lg-2 ";
     card.className = "card mb-4 box-shadow";
     cardBody.className = "card-body";
     description.className = "text-muted"
     price.className = "card-text";
-    img.classname = "card-img-top book_cover";
+    img.classname = "card-img-top";
     name.className = "card-text";
 
 
@@ -79,7 +79,12 @@ function generaPaginaButton(prod) {
     paginaButton.addEventListener("click", async () => {
         const myWindow = window.open();
         myWindow.body
-        myWindow.document.write(`<body class="pagina">
+        myWindow.document.write(`<head>
+                                    <meta charset="utf-8" />
+                                    <title></title>
+                                    <link rel="stylesheet" href="paginaprod.css">
+                                    </head>
+                                    <body class="pagina">
                                      <main>
                                           <figure>
                                             <img src="${prod.imageUrl}"/>
