@@ -26,9 +26,11 @@ const SingleBook = ({ product, toggleSelected }) => {
           <p>{product.category}</p>
         </div>
       </div>
-      {isSelected && <div>
-        <CommentSection product={product}/>
-      </div>}
+      {isSelected && (
+        <div>
+          <CommentSection product={product} />
+        </div>
+      )}
     </div>
   );
 };
